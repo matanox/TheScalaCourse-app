@@ -1,7 +1,10 @@
 lazy val app = (project in file("."))
   .enablePlugins(PlayScala)
   .settings(
-    scalaVersion := "2.11.7"
+    scalaVersion := "2.11.7",
+    libraryDependencies ++= Seq(
+      ws // for play framework client calls
+    )
   )
 
 /*

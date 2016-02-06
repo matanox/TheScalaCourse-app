@@ -24,3 +24,6 @@ project/plugins/project/
 .project
 .settings/
 /bin/
+
+# Github application authentication
+setenv.sh
