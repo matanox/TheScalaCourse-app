@@ -10,6 +10,7 @@ import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.libs.json._
 
 object HttpClient {
+  
   def requestAccessToken(tmpCode: String) = {
     val accessTokenRequestUrl = "https://github.com/login/oauth/access_token"
     val request = WS.url(accessTokenRequestUrl).withQueryString(
@@ -32,7 +33,8 @@ object HttpClient {
       println(jsResponse.body)
       jsResponse.body.startsWith("error=") match {
         case true  => println(s"Github refused access token request ― returned error information: \n${jsResponse.body}")
-        case false => println(println(jsResponse.body))               
+        case false => 
+          println(println(jsResponse.body))
       }
       
       /*
