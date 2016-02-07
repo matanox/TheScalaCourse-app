@@ -9,48 +9,30 @@ import play.api.Play.current
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.libs.json._
 
-object TMP {
-  
-  def requestAccessToken(tmpCode: String) = {
-    val accessTokenRequestUrl = "https://github.com/login/oauth/access_token"
-    val request = WS.url(accessTokenRequestUrl).withQueryString(
-      "client_id" -> sys.env("GITHUB_APP_CLIENT_ID"),
-      "client secret" -> sys.env("GITHUB_APP_CLIENT_SECRET"),
-      "code" -> tmpCode)
-    
-    request.get map { jsResponse =>
-      
-      /*
-       * At present time, response for this call should always be 200, 
-       * whereas error details would be in the response body. 
-       */
-      
-      if (jsResponse.status != 200) {
-        println(s"Github returned an unexpected http response code (${jsResponse.status}) for our access token request. Request was:\n$request")
-        throw new Exception("Github returned an unexpected http response code")
-      }
-      
-      println(jsResponse.body)
-      jsResponse.body.startsWith("error=") match {
-        case true  => println(s"Github refused access token request ― returned error information: \n${jsResponse.body}")
-        case false => 
-          println(println(jsResponse.body))
-      }
-      
-      /*
-      (Json.parse(jsResponse.body) \ "error").toOption match {
-        case Some(errortitle) => println(s"Github refused access token request ― returned error information: \n${jsResponse.body}")
-        case None => println(println(jsResponse.body)) 
-      }
-      */
-    }
-  }
-}
+/*
+ * TODO: set up github web hooks security per https://developer.github.com/webhooks/securing/
+ */
 
 object WebhookPayload extends Controller {
-  
   def apply = Action(parse.json) { request =>
-    println(request.body)
+    
+    /* TODO: use proper play json (or my own macro powered) validations rather than merely .get */
+    
+    val body = request.body
+    val sender = (body \ "sender" \ "login").get
+    val organization = (body \ "organization").get
+
+    (body \ "zen").toOption match {
+      
+      case Some(_) => 
+        println(s"Webhook ping event received (this is a synthetic request typically only used for validating connectivity from Github, as per https://developer.github.com/webhooks/#ping-event). Raw request:\n$body")
+        
+      case None =>
+        val repositoryName = (body \ "repository" \ "full_name").get
+        val headCommit = (body \ "head_commit" \ "message").get
+        println(s"""$sender pushed to $repositoryName with commit message $headCommit""")
+        
+    }
     Ok("Thanks for the webhook payload")
   }
 }

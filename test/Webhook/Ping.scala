@@ -1,0 +1,60 @@
+package Webhook
+
+object scala {
+  val jsonBody = """
+    {
+      "zen":"Design for failure.",
+      "hook_id":7215824,
+      "hook":{
+        "url":"https://api.github.com/orgs/TheScalaCourse/hooks/7215824",
+        "ping_url":"https://api.github.com/orgs/TheScalaCourse/hooks/7215824/pings",
+        "id":7215824,
+        "name":"web",
+        "active":true,
+        "events":[
+          "push"
+        ],
+        "config":{
+          "url":"https://aqueous-harbor-29139.herokuapp.com/webhook_payload/",
+          "content_type":"json",
+          "insecure_ssl":"0",
+          "secret":""
+        },
+        "updated_at":"2016-02-07T15:32:30Z",
+        "created_at":"2016-02-07T15:32:30Z"
+      },
+      "organization":{
+        "login":"TheScalaCourse",
+        "id":17097573,
+        "url":"https://api.github.com/orgs/TheScalaCourse",
+        "repos_url":"https://api.github.com/orgs/TheScalaCourse/repos",
+        "events_url":"https://api.github.com/orgs/TheScalaCourse/events",
+        "hooks_url":"https://api.github.com/orgs/TheScalaCourse/hooks",
+        "issues_url":"https://api.github.com/orgs/TheScalaCourse/issues",
+        "members_url":"https://api.github.com/orgs/TheScalaCourse/members{/member}",
+        "public_members_url":"https://api.github.com/orgs/TheScalaCourse/public_members{/member}",
+        "avatar_url":"https://avatars.githubusercontent.com/u/17097573?v=3",
+        "description":null
+      },
+      "sender":{
+        "login":"matanster",
+        "id":4996067,
+        "avatar_url":"https://avatars.githubusercontent.com/u/4996067?v=3",
+        "gravatar_id":"",
+        "url":"https://api.github.com/users/matanster",
+        "html_url":"https://github.com/matanster",
+        "followers_url":"https://api.github.com/users/matanster/followers",
+        "following_url":"https://api.github.com/users/matanster/following{/other_user}",
+        "gists_url":"https://api.github.com/users/matanster/gists{/gist_id}",
+        "starred_url":"https://api.github.com/users/matanster/starred{/owner}{/repo}",
+        "subscriptions_url":"https://api.github.com/users/matanster/subscriptions",
+        "organizations_url":"https://api.github.com/users/matanster/orgs",
+        "repos_url":"https://api.github.com/users/matanster/repos",
+        "events_url":"https://api.github.com/users/matanster/events{/privacy}",
+        "received_events_url":"https://api.github.com/users/matanster/received_events",
+        "type":"User",
+        "site_admin":false
+      }
+    }  
+  """
+}
