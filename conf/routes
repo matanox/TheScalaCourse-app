@@ -1,2 +1,3 @@
-GET  /                controllers.Root.apply
-GET  /oauth_callback  controllers.OauthCallback.apply(code: Option[String], error: Option[String])
+GET   /                 controllers.Root.apply
+GET   /oauth_callback   controllers.OauthCallback.apply(code: Option[String], error: Option[String])
+POST  /webhook_payload  controllers.WebhookPayload.apply
