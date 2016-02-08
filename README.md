@@ -21,8 +21,11 @@ heroku local web
 To test by pushing to a repo as a different user:  
 http://stackoverflow.com/a/4220493/1509695
 
-Github application currently configured to hit at this server:   
+Hosted server currently running this repo:  
+https://dashboard.heroku.com/apps/aqueous-harbor-29139/resources
+
+Github application currently configured to hit at that server:   
 https://github.com/settings/applications/299198
 
-Webhook currently configured to hit at this server:  
+Webhook currently configured to hit at that server:  
 https://github.com/organizations/TheScalaCourse/settings/hooks
