@@ -10,13 +10,13 @@ import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.libs.json._
 
 /*
- * TODO: set up github web hooks security per https://developer.github.com/webhooks/securing/
+ * TODO (2): set up github web hooks security per https://developer.github.com/webhooks/securing/
  */
 
 object WebhookPayload extends Controller {
   def apply = Action(parse.json) { request =>
     
-    /* TODO: use proper play json (or my own macro powered) validations rather than merely .get */
+    /* TODO (1): use proper play json (or my own macro powered) validations rather than merely .get */
     
     val body = request.body
     val sender = (body \ "sender" \ "login").get
@@ -27,7 +27,7 @@ object WebhookPayload extends Controller {
       case Some(_) => 
         println(s"Webhook ping event received (this is a synthetic request typically only used for validating connectivity from Github, as per https://developer.github.com/webhooks/#ping-event). Raw request:\n$body")
         
-      case None =>
+      case None => /* a real payload */
         val repositoryName = (body \ "repository" \ "full_name").get
         val headCommit = (body \ "head_commit" \ "message").get
         println(s"""$sender pushed to $repositoryName with commit message $headCommit""")
